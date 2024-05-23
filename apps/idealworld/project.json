@@ -1,0 +1,86 @@
+{
+  "projectType": "application",
+  "root": "apps/idealworld",
+  "sourceRoot": "apps/idealworld/src",
+  "prefix": "ideal",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "options": {
+        "outputPath": "dist/apps/idealworld",
+        "index": "apps/idealworld/src/index.html",
+        "main": "apps/idealworld/src/main.ts",
+        "polyfills": "apps/idealworld/src/polyfills.ts",
+        "tsConfig": "apps/idealworld/tsconfig.app.json",
+        "assets": [
+          "apps/idealworld/src/favicon.ico",
+          "apps/idealworld/src/assets"
+        ],
+        "styles": ["apps/idealworld/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/idealworld/webpack.config",
+        "buildLibsFromSource": true
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/idealworld/src/environments/environment.ts",
+              "with": "apps/idealworld/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "extractCss": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "idealworld:build",
+        "port": 4203
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "idealworld:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/idealworld/src/**/*.ts",
+          "apps/idealworld/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "apps/idealworld/src/test.ts",
+        "tsConfig": "apps/idealworld/tsconfig.spec.json",
+        "karmaConfig": "apps/idealworld/karma.conf.js",
+        "polyfills": "apps/idealworld/src/polyfills.ts",
+        "styles": [],
+        "scripts": [],
+        "assets": []
+      }
+    }
+  },
+  "tags": []
+}

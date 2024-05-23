@@ -1,0 +1,86 @@
+{
+  "projectType": "application",
+  "root": "apps/fakeworld",
+  "sourceRoot": "apps/fakeworld/src",
+  "prefix": "nx-migrate-angularjs",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "options": {
+        "outputPath": "dist/apps/fakeworld",
+        "index": "apps/fakeworld/src/index.html",
+        "main": "apps/fakeworld/src/main.ts",
+        "polyfills": "apps/fakeworld/src/polyfills.ts",
+        "tsConfig": "apps/fakeworld/tsconfig.app.json",
+        "assets": [
+          "apps/fakeworld/src/favicon.ico",
+          "apps/fakeworld/src/assets"
+        ],
+        "styles": ["apps/fakeworld/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "apps/fakeworld/webpack.config",
+        "buildLibsFromSource": true
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/fakeworld/src/environments/environment.ts",
+              "with": "apps/fakeworld/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "extractCss": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "fakeworld:build",
+        "port": 4202
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "fakeworld:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/fakeworld/src/**/*.ts",
+          "apps/fakeworld/src/**/*.html"
+        ]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "apps/fakeworld/src/test.ts",
+        "tsConfig": "apps/fakeworld/tsconfig.spec.json",
+        "karmaConfig": "apps/fakeworld/karma.conf.js",
+        "polyfills": "apps/fakeworld/src/polyfills.ts",
+        "styles": [],
+        "scripts": [],
+        "assets": []
+      }
+    }
+  },
+  "tags": []
+}
